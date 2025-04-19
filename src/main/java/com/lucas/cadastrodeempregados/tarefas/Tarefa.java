@@ -1,5 +1,6 @@
 package com.lucas.cadastrodeempregados.tarefas;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucas.cadastrodeempregados.empregados.Empregado;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,6 @@ public class Tarefa {
     private String descricao;
 
     @OneToMany(mappedBy = "tarefa")
+    @JsonIgnore
     private List<Empregado> empregados;
 }

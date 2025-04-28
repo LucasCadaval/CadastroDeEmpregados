@@ -15,23 +15,23 @@ public class EmpregadoController {
     }
 
     @GetMapping("/get")
-    public List<Empregado> getAll() {
+    public List<EmpregadoDTO> getAll() {
         return empregadoService.getAll();
     }
 
     @GetMapping("/get/{id}")
-    public Empregado getById(@PathVariable int id) {
+    public EmpregadoDTO getById(@PathVariable int id) {
         return empregadoService.getById(id);
     }
 
     @PostMapping("/add")
-    public Empregado add(@RequestBody Empregado empregado) {
-        return empregadoService.add(empregado);
+    public EmpregadoDTO add(@RequestBody EmpregadoDTO empregadoDTO) {
+        return empregadoService.add(empregadoDTO);
     }
 
     @PutMapping("/update/{id}")
-    public Empregado update(@PathVariable int id,@RequestBody Empregado empregado) {
-        return empregadoService.update(id, empregado);
+    public EmpregadoDTO update(@PathVariable int id,@RequestBody EmpregadoDTO empregadoDTO) {
+        return empregadoService.update(id, empregadoDTO);
     }
 
     @DeleteMapping("/delete/{id}")

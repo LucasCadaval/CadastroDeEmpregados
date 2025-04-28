@@ -4,44 +4,48 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EmpregadoService {
 
     private final EmpregadoRepository empregadoRepository;
+    private final EmpregadoMapper empregadoMapper;
 
-    public EmpregadoService(EmpregadoRepository empregadoRepository) {
+    public EmpregadoService(EmpregadoRepository empregadoRepository, EmpregadoMapper empregadoMapper) {
         this.empregadoRepository = empregadoRepository;
+        this.empregadoMapper = empregadoMapper;
     }
 
     /* Busca todos os empregados */
-    public List<Empregado> getAll() {
-        return empregadoRepository.findAll();
+    public List<EmpregadoDTO> getAll() {
+        List<Empregado> empregados = empregadoRepository.findAll();
+        return empregados.stream()
+                .map(empregadoMapper::map)
+                .collect(Collectors.toList());
     }
 
     /* Busca empregado pelo id */
-    public Empregado getById(int id) {
-        return empregadoRepository.findById(id).orElse(null);
+    public EmpregadoDTO getById(int id) {
+        Optional<Empregado> empregado = empregadoRepository.findById(id);
+        return empregado.map(empregadoMapper::map).orElse(null);
     }
 
     /* Cria novo empregado */
-    public Empregado add(Empregado empregado) {
-        return empregadoRepository.save(empregado);
+    public EmpregadoDTO add(EmpregadoDTO empregadoDTO) {
+        Empregado empregado = empregadoMapper.map(empregadoDTO);
+        empregado = empregadoRepository.save(empregado);
+        return empregadoMapper.map(empregado);
     }
 
     /* Atualiza empregado por id */
-    public Empregado update(int id, Empregado empregado) {
+    public EmpregadoDTO update(int id, EmpregadoDTO empregadoDTO) {
         Optional<Empregado> empregadoToUpate = empregadoRepository.findById(id);
         if(empregadoToUpate.isPresent()) {
-            Empregado empregadoUpdated = empregadoToUpate.get();
-            empregadoUpdated.setNome(empregado.getNome());
-            empregadoUpdated.setCep(empregado.getCep());
-            empregadoUpdated.setCpf(empregado.getCpf());
-            empregadoUpdated.setEmail(empregado.getEmail());
-            empregadoUpdated.setEndereco(empregado.getEndereco());
-            empregadoUpdated.setTarefa(empregado.getTarefa());
-
-            return empregadoRepository.save(empregadoUpdated);
+            Empregado empregadoUpdated = empregadoMapper.map(empregadoDTO);
+            empregadoUpdated.setId(id);
+            Empregado empregadoSaved = empregadoRepository.save(empregadoUpdated);
+            return empregadoMapper.map(empregadoSaved);
         }
         return null;
     }

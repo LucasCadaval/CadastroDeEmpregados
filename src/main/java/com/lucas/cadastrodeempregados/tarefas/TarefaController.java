@@ -20,7 +20,7 @@ public class TarefaController {
     }
 
     @GetMapping("/get/{id}")
-    public Tarefa getById(@PathVariable int id) {
+    public Tarefa getById(@PathVariable Long id) {
         return tarefaService.getById(id);
     }
 
@@ -30,12 +30,12 @@ public class TarefaController {
     }
 
     @PutMapping("/update/{id}")
-    public Tarefa update(@PathVariable int id,@RequestBody Tarefa tarefa) {
+    public Tarefa update(@PathVariable Long id,@RequestBody Tarefa tarefa) {
         return tarefaService.update(id, tarefa);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable Long id) {
         tarefaService.delete(id);
     }
 }

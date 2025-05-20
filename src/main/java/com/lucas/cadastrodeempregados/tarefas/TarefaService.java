@@ -21,7 +21,7 @@ public class TarefaService {
     }
 
     /* Busca tarefa pelo id */
-    public Tarefa getById(int id) {
+    public Tarefa getById(Long id) {
         return tarefaRepository.findById(id).orElse(null);
     }
 
@@ -31,7 +31,7 @@ public class TarefaService {
     }
 
     /* Atualiza tarefa por id */
-    public Tarefa update(int id, Tarefa tarefa) {
+    public Tarefa update(Long id, Tarefa tarefa) {
         Optional<Tarefa> tarefaToUpdate = tarefaRepository.findById(id);
         if(tarefaToUpdate.isPresent()) {
             Tarefa tarefaUpdated = tarefaToUpdate.get();
@@ -44,7 +44,7 @@ public class TarefaService {
     }
 
     /* Deleta tarefa por id */
-    public void delete(int id) {
+    public void delete(Long id) {
         tarefaRepository.deleteById(id);
     }
 }

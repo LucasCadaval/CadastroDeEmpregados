@@ -20,7 +20,7 @@ public class EmpregadoController {
     }
 
     @GetMapping("/get/{id}")
-    public EmpregadoDTO getById(@PathVariable int id) {
+    public EmpregadoDTO getById(@PathVariable Long id) {
         return empregadoService.getById(id);
     }
 
@@ -30,12 +30,12 @@ public class EmpregadoController {
     }
 
     @PutMapping("/update/{id}")
-    public EmpregadoDTO update(@PathVariable int id,@RequestBody EmpregadoDTO empregadoDTO) {
+    public EmpregadoDTO update(@PathVariable Long id,@RequestBody EmpregadoDTO empregadoDTO) {
         return empregadoService.update(id, empregadoDTO);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable Long id) {
         empregadoService.delete(id);
     }
 }

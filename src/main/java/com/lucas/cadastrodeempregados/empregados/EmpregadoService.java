@@ -26,7 +26,7 @@ public class EmpregadoService {
     }
 
     /* Busca empregado pelo id */
-    public EmpregadoDTO getById(int id) {
+    public EmpregadoDTO getById(Long id) {
         Optional<Empregado> empregado = empregadoRepository.findById(id);
         return empregado.map(empregadoMapper::map).orElse(null);
     }
@@ -39,7 +39,7 @@ public class EmpregadoService {
     }
 
     /* Atualiza empregado por id */
-    public EmpregadoDTO update(int id, EmpregadoDTO empregadoDTO) {
+    public EmpregadoDTO update(Long id, EmpregadoDTO empregadoDTO) {
         Optional<Empregado> empregadoToUpate = empregadoRepository.findById(id);
         if(empregadoToUpate.isPresent()) {
             Empregado empregadoUpdated = empregadoMapper.map(empregadoDTO);
@@ -51,7 +51,7 @@ public class EmpregadoService {
     }
 
     /* Deleta empregado por id */
-    public void delete(int id) {
+    public void delete(Long id) {
         empregadoRepository.deleteById(id);
     }
 }

@@ -15,23 +15,23 @@ public class TarefaController {
     }
 
     @GetMapping("/get")
-    public List<Tarefa> getAll() {
+    public List<TarefaDTO> getAll() {
         return tarefaService.getAll();
     }
 
     @GetMapping("/get/{id}")
-    public Tarefa getById(@PathVariable Long id) {
+    public TarefaDTO getById(@PathVariable Long id) {
         return tarefaService.getById(id);
     }
 
     @PostMapping("/add")
-    public Tarefa add(@RequestBody Tarefa tarefa) {
-        return tarefaService.add(tarefa);
+    public TarefaDTO add(@RequestBody TarefaDTO tarefaDTO) {
+        return tarefaService.add(tarefaDTO);
     }
 
     @PutMapping("/update/{id}")
-    public Tarefa update(@PathVariable Long id,@RequestBody Tarefa tarefa) {
-        return tarefaService.update(id, tarefa);
+    public TarefaDTO update(@PathVariable Long id,@RequestBody TarefaDTO tarefaDTO) {
+        return tarefaService.update(id, tarefaDTO);
     }
 
     @DeleteMapping("/delete/{id}")
